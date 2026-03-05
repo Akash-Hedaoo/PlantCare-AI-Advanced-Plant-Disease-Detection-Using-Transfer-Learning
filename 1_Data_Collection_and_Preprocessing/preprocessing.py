@@ -13,7 +13,7 @@ valid_gen = ImageDataGenerator(rescale=1./255)
 
 # Load training data
 train_data = train_gen.flow_from_directory(
-    "1_Data_Collection_and_Preprocessing/train",
+    "train",
     target_size=(224, 224),
     batch_size=32,
     class_mode="categorical"
@@ -21,7 +21,7 @@ train_data = train_gen.flow_from_directory(
 
 # Load validation data
 valid_data = valid_gen.flow_from_directory(
-    "1_Data_Collection_and_Preprocessing/validation",
+    "valid",
     target_size=(224, 224),
     batch_size=32,
     class_mode="categorical"

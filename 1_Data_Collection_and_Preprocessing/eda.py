@@ -11,8 +11,8 @@ from PIL import Image
 # 1. Configure Dataset Paths
 # ===============================
 
-train_dir = "1_Data_Collection_and_Preprocessing/train"
-valid_dir = "1_Data_Collection_and_Preprocessing/validation"
+train_dir = "train"
+valid_dir = "valid"
 
 print("Train path exists:", os.path.exists(train_dir))
 print("Validation path exists:", os.path.exists(valid_dir))
@@ -33,7 +33,11 @@ def show_samples(directory, num_classes=3, images_per_class=3):
         class_path = os.path.join(directory, cls)
 
         # select random images
-        images = random.sample(os.listdir(class_path), images_per_class)
+        available_images = os.listdir(class_path)
+        num_to_sample = min(len(available_images), images_per_class)
+        if num_to_sample == 0:
+            continue
+        images = random.sample(available_images, num_to_sample)
 
         for img in images:
             img_path = os.path.join(class_path, img)
