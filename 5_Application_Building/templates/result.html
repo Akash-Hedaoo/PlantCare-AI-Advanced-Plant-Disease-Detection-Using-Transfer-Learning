@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result — PlantCare AI</title>
+  <meta name="description" content="View plant disease detection results from PlantCare AI.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c4 0 8.68-3 11.34-7.66A3 3 0 0 0 21 9a3 3 0 0 0-3-3c-.28 0-.55.04-.81.1" fill="#fff"/>
+            <path d="M2 21c.6-2.5 1.65-5.16 3.46-6.5 1.14-.85 2.54-1.29 3.54-.5s1 2.5-.5 4.5-3.5 3-5.5 2.5" fill="#fff" opacity=".7"/>
+          </svg>
+        </div>
+        <span class="logo-text">PlantCare AI</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/upload" class="btn-nav">New Analysis</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Result ── -->
+  <section class="result-page">
+    <div class="container">
+
+      <div class="result-header">
+        <h1>Analysis Complete</h1>
+        <p>Here's what we found</p>
+      </div>
+
+      <div class="result-grid">
+
+        <!-- Left: Uploaded image -->
+        <div class="result-image-col">
+          <h3 class="result-col-label">Uploaded Image</h3>
+          {% if image_path %}
+          <div class="result-img-wrap">
+            <img src="{{ url_for('static', filename=image_path) }}" alt="Uploaded plant image">
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Right: Analysis results -->
+        <div class="result-info-col">
+
+          <!-- Status badge -->
+          {% if is_healthy %}
+          <div class="status-badge status-healthy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            HEALTHY PLANT
+          </div>
+          {% else %}
+          <div class="status-badge status-disease">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            DISEASE DETECTED
+          </div>
+          {% endif %}
+
+          <!-- Status icon -->
+          <div class="status-icon-wrap">
+            {% if is_healthy %}
+            <div class="status-circle status-circle-healthy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="width:32px;height:32px;" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            {% else %}
+            <div class="status-circle status-circle-disease">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="width:32px;height:32px;" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Plant type -->
+          <div class="result-detail-row">
+            <span class="result-detail-label">PLANT TYPE</span>
+            <span class="result-detail-value">{{ plant_type }}</span>
+          </div>
+
+          <!-- Condition -->
+          <div class="result-detail-row">
+            <span class="result-detail-label">CONDITION</span>
+            <span class="result-detail-value {% if is_healthy %}text-green{% else %}text-red{% endif %}">{{ condition }}</span>
+          </div>
+
+          <!-- Recommendations -->
+          {% if is_healthy %}
+          <div class="reco-card reco-healthy">
+            <h4>🌱 Keep Your Plant Healthy</h4>
+            <ul>
+              <li>Continue regular watering and care</li>
+              <li>Ensure adequate sunlight and nutrients</li>
+              <li>Monitor for any changes in appearance</li>
+              <li>Maintain good air circulation</li>
+            </ul>
+          </div>
+          {% else %}
+          <div class="reco-card reco-disease">
+            <h4>🌱 Recommended Actions</h4>
+            <ul>
+              <li>Isolate affected plants to prevent spread</li>
+              <li>Consult with an agricultural expert</li>
+              <li>Consider appropriate treatment methods</li>
+              <li>Monitor other plants for similar symptoms</li>
+            </ul>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+
+      <!-- Bottom buttons -->
+      <div class="result-actions">
+        <a href="/upload" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Analyze Another Image
+        </a>
+        <a href="/" class="btn-outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Back to Home
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--green-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c4 0 8.68-3 11.34-7.66A3 3 0 0 0 21 9a3 3 0 0 0-3-3"/>
+          </svg>
+          <span>Smart Bridge Hyderabad</span>
+        </div>
+        <p class="footer-copy">Empowering agriculture through innovative AI solutions</p>
+        <p class="footer-copy" style="margin-top: 4px;">© 2025 Smart Bridge Hyderabad. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

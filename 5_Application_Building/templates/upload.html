@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload — PlantCare AI</title>
+  <meta name="description" content="Upload a photo of your plant leaf to detect diseases using our AI-powered system.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c4 0 8.68-3 11.34-7.66A3 3 0 0 0 21 9a3 3 0 0 0-3-3c-.28 0-.55.04-.81.1" fill="#fff"/>
+            <path d="M2 21c.6-2.5 1.65-5.16 3.46-6.5 1.14-.85 2.54-1.29 3.54-.5s1 2.5-.5 4.5-3.5 3-5.5 2.5" fill="#fff" opacity=".7"/>
+          </svg>
+        </div>
+        <span class="logo-text">PlantCare AI</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/upload" class="btn-nav active">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Upload Area ── -->
+  <section class="upload-page">
+    <div class="container">
+      <div class="upload-header">
+        <h1>Upload Plant Image</h1>
+        <p>Take or upload a clear photo of the affected plant leaf</p>
+      </div>
+
+      <div class="upload-card">
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--green-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <h3>Drag &amp; Drop Image Here</h3>
+          <p>or click to browse from your device</p>
+          <p class="dropzone-formats">Supported formats: JPG, JPEG, PNG (Max: 16MB)</p>
+          <input type="file" id="fileInput" accept="image/*">
+        </div>
+
+        <button class="btn-primary btn-choose" id="chooseBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Choose Image
+        </button>
+
+        <!-- Preview (shown after file is selected) -->
+        <div class="preview-area" id="previewArea">
+          <img id="previewImg" alt="Preview">
+          <p class="preview-name" id="previewName"></p>
+          <div class="upload-btn-row">
+            <button class="btn-primary" id="analyzeBtn">
+              <span>Analyze Image</span>
+              <div class="spinner"></div>
+            </button>
+            <button class="btn-outline" id="clearBtn">Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tips -->
+      <div class="tips-card">
+        <h3>📷 Tips for Best Results</h3>
+        <div class="tips-grid">
+          <div class="tip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2.5" style="width:18px;height:18px;flex-shrink:0;" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Take photos in good lighting</span>
+          </div>
+          <div class="tip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2.5" style="width:18px;height:18px;flex-shrink:0;" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Focus on the affected leaf area</span>
+          </div>
+          <div class="tip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2.5" style="width:18px;height:18px;flex-shrink:0;" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Keep the camera steady</span>
+          </div>
+          <div class="tip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="2.5" style="width:18px;height:18px;flex-shrink:0;" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Avoid blurry images</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--green-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c4 0 8.68-3 11.34-7.66A3 3 0 0 0 21 9a3 3 0 0 0-3-3"/>
+          </svg>
+          <span>Smart Bridge Hyderabad</span>
+        </div>
+        <p class="footer-copy">Empowering agriculture through innovative AI solutions</p>
+        <p class="footer-copy" style="margin-top: 4px;">© 2025 Smart Bridge Hyderabad. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const dropzone   = document.getElementById('dropzone');
+    const fileInput  = document.getElementById('fileInput');
+    const chooseBtn  = document.getElementById('chooseBtn');
+    const previewArea = document.getElementById('previewArea');
+    const previewImg  = document.getElementById('previewImg');
+    const previewName = document.getElementById('previewName');
+    const analyzeBtn  = document.getElementById('analyzeBtn');
+    const clearBtn    = document.getElementById('clearBtn');
+
+    let selectedFile = null;
+
+    // Choose button clicks file input
+    chooseBtn.addEventListener('click', () => fileInput.click());
+
+    // ── Drag & Drop ──
+    ['dragenter','dragover'].forEach(evt =>
+      dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.add('dragover'); })
+    );
+    ['dragleave','drop'].forEach(evt =>
+      dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.remove('dragover'); })
+    );
+    dropzone.addEventListener('drop', e => {
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) handleFile(file);
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files[0]) handleFile(fileInput.files[0]);
+    });
+
+    function handleFile(file) {
+      selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = e => {
+        previewImg.src = e.target.result;
+        previewName.textContent = file.name;
+        previewArea.style.display = 'block';
+        dropzone.style.display = 'none';
+        chooseBtn.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    clearBtn.addEventListener('click', () => {
+      selectedFile = null;
+      fileInput.value = '';
+      previewArea.style.display = 'none';
+      dropzone.style.display = 'block';
+      chooseBtn.style.display = 'inline-flex';
+      analyzeBtn.classList.remove('loading');
+      analyzeBtn.disabled = false;
+    });
+
+    analyzeBtn.addEventListener('click', async () => {
+      if (!selectedFile) return;
+
+      analyzeBtn.classList.add('loading');
+      analyzeBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      try {
+        const resp = await fetch('/predict', { method: 'POST', body: formData });
+        const data = await resp.json();
+        if (data.success) {
+          window.location.href = '/result';
+        } else {
+          alert('Error: ' + (data.error || 'Unknown error'));
+          analyzeBtn.classList.remove('loading');
+          analyzeBtn.disabled = false;
+        }
+      } catch (err) {
+        alert('Network error. Please try again.');
+        analyzeBtn.classList.remove('loading');
+        analyzeBtn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>

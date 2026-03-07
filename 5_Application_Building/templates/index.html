@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlantCare AI — AI-Powered Plant Disease Detection</title>
+  <meta name="description" content="Protect your crops with cutting-edge artificial intelligence. Instant disease identification for healthier plants and better yields.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c4 0 8.68-3 11.34-7.66A3 3 0 0 0 21 9a3 3 0 0 0-3-3c-.28 0-.55.04-.81.1" fill="#fff"/>
+            <path d="M2 21c.6-2.5 1.65-5.16 3.46-6.5 1.14-.85 2.54-1.29 3.54-.5s1 2.5-.5 4.5-3.5 3-5.5 2.5" fill="#fff" opacity=".7"/>
+          </svg>
+        </div>
+        <span class="logo-text">PlantCare AI</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/upload" class="btn-nav">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero Section ── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>
+          AI-Powered
+          <span class="highlight">Plant Disease<br>Detection</span>
+        </h1>
+        <p>Protect your crops with cutting-edge artificial intelligence. Instant disease identification for healthier plants and better yields.</p>
+        <div class="hero-btns">
+          <a href="/upload" class="btn-primary">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload Image
+          </a>
+          <a href="/about" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="{{ url_for('static', filename='images/hero_plant.png') }}" alt="Healthy green plant leaves">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ── -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Why Choose PlantCare AI?</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Instant Detection</h3>
+          <p>Get results in seconds with our advanced AI model trained on thousands of plant images.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>High Accuracy</h3>
+          <p>Powered by MobileNetV2 architecture for precise disease identification across multiple plant species.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Easy to Use</h3>
+          <p>Simple interface — just upload a photo and get instant diagnosis. No technical knowledge required.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats Bar ── -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-number">38+</div>
+          <div class="stat-label">Plant Diseases</div>
+        </div>
+        <div>
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Accuracy Rate</div>
+        </div>
+        <div>
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Plant Species</div>
+        </div>
+        <div>
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Protect Your Plants?</h2>
+      <p>Start detecting plant diseases now with our AI-powered system.</p>
+      <a href="/upload" class="btn-white">Get Started Now</a>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>About Plant Disease Detection System</h3>
+          <p>Our advanced AI-powered platform utilizes state-of-the-art deep learning technology to accurately identify plant diseases in real-time. With a comprehensive database of plant conditions and diseases, we help farmers, gardeners, and agricultural professionals make informed decisions about plant health management.</p>
+        </div>
+        <div class="footer-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--green-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c4 0 8.68-3 11.34-7.66A3 3 0 0 0 21 9a3 3 0 0 0-3-3"/>
+          </svg>
+          <span>Smart Bridge Hyderabad</span>
+        </div>
+        <p class="footer-copy">Empowering agriculture through innovative AI solutions</p>
+        <p class="footer-copy" style="margin-top: 8px;">© 2025 Smart Bridge Hyderabad. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
